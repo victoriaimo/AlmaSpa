@@ -109,7 +109,7 @@ def turnos(request):
             )
 
             try:
-                send_mail(
+                resultado = send_mail(
                     asunto,
                     mensaje,
                     settings.DEFAULT_FROM_EMAIL,
@@ -117,11 +117,18 @@ def turnos(request):
                     fail_silently=False,
                 )
 
-                mensaje_exito = (
-                    '¡Tu solicitud de turno fue enviada correctamente!'
-                )
+                if resultado == 1:
+                    mensaje_exito = (
+                        '¡Tu solicitud de turno fue enviada correctamente!'
+                    )
+                else:
+                    mensaje_exito = (
+                        'Tu solicitud fue registrada correctamente, '
+                        'pero no se pudo enviar el correo de confirmación.'
+                    )
 
-            except Exception:
+            except Exception as e:
+
                 mensaje_exito = (
                     'Tu solicitud fue registrada correctamente, '
                     'pero no se pudo enviar el correo de confirmación.'
