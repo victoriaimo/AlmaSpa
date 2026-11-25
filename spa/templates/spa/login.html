@@ -1,0 +1,45 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Iniciar sesión | Alma Spa{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'spa/css/spa.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="auth-section">
+    <div class="auth-container">
+
+        <h1>Iniciar sesión</h1>
+        <p>Accedé al sistema de administración de Alma Spa.</p>
+
+        <form method="post">
+            {% csrf_token %}
+
+            {{ form.non_field_errors }}
+
+            {% for campo in form %}
+                <div class="campo">
+                    {{ campo.label_tag }}
+                    {{ campo }}
+                    {{ campo.errors }}
+                </div>
+            {% endfor %}
+
+            <button type="submit" class="btn-auth">
+                Iniciar sesión
+            </button>
+        </form>
+
+        <p>
+            ¿Todavía no tenés una cuenta?
+            <a href="{% url 'registro' %}">Registrate</a>
+        </p>
+
+    </div>
+</section>
+
+{% endblock %}

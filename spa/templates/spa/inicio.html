@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'spa/css/spa.css' %}">
+{% endblock %}
+
+{% block title %}Inicio | Alma Spa{% endblock %}
+
+{% block content %}
+
+<section class="hero-inicio">
+    <img src="{% static 'img/hero-spa.jpeg' %}" alt="Momento de relajación en Alma Spa">
+
+    <div class="hero-sombra"></div>
+
+    <div class="hero-texto">
+        <p class="etiqueta">ALMA SPA · BIENESTAR & RELAJACIÓN</p>
+
+        <h1>
+            Tiempo para<br>
+            volver a vos
+        </h1>
+
+        <p class="hero-descripcion">
+            Un espacio pensado para desconectarte de la rutina,
+            relajarte y disfrutar de un momento para vos.
+        </p>
+
+        <a href="{% url 'turnos' %}" class="boton-claro">
+            Solicitar turno
+        </a>
+    </div>
+</section>
+
+
+<section class="presentacion">
+
+    <div class="presentacion-imagen">
+        <img src="{% static 'img/masaje.jpeg' %}"
+             alt="Tratamiento de masaje en Alma Spa">
+    </div>
+
+    <div class="presentacion-texto">
+
+        <p class="etiqueta">NUESTRA ESENCIA</p>
+
+        <h2>
+            Calma para el cuerpo,<br>
+            bienestar para el alma.
+        </h2>
+
+        <p>
+            En Alma Spa ofrecemos tratamientos corporales y faciales
+            pensados para ayudarte a recuperar el equilibrio y disfrutar
+            de una experiencia de relajación.
+        </p>
+
+        <a href="{% url 'tratamientos' %}" class="boton-oscuro">
+            Ver tratamientos
+        </a>
+
+    </div>
+
+</section>
+
+
+<section class="espacio-inicio">
+
+    <div class="espacio-texto">
+        <p class="etiqueta">EL ESPACIO</p>
+
+        <h2>Un lugar pensado para desconectar.</h2>
+
+        <p>
+            Creamos un ambiente cálido, tranquilo y armonioso para que
+            cada visita sea un momento dedicado a vos.
+        </p>
+
+        <a href="{% url 'espacio' %}" class="link-texto">
+            Conocé nuestro espacio →
+        </a>
+    </div>
+
+    <div class="espacio-imagen">
+        <img src="{% static 'img/espacio-spa.jpeg' %}"
+             alt="Interior de Alma Spa">
+    </div>
+
+</section>
+
+{% endblock %}

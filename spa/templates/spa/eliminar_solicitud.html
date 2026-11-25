@@ -1,0 +1,50 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'spa/css/spa.css' %}">
+{% endblock %}
+
+{% block title %}Eliminar solicitud | Alma Spa{% endblock %}
+
+{% block content %}
+
+<section class="panel-admin">
+
+    <p class="etiqueta">GESTIÓN INTERNA</p>
+
+    <h1>Eliminar solicitud</h1>
+
+    <div class="panel-formulario">
+
+        <p>
+            ¿Estás seguro de que querés eliminar la solicitud
+            de <strong>{{ solicitud.nombre }}</strong>?
+        </p>
+
+        <p>Esta acción no se puede deshacer.</p>
+
+        <form method="post">
+
+            {% csrf_token %}
+
+            <div class="panel-acciones">
+
+                <button type="submit" class="boton-eliminar">
+                    Confirmar eliminación
+                </button>
+
+                <a href="{% url 'panel' %}" class="boton-cancelar">
+                    Cancelar
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</section>
+
+{% endblock %}

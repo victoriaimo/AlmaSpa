@@ -1,0 +1,65 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Validar cuenta | Alma Spa{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'spa/css/spa.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="auth-section">
+    <div class="auth-container">
+
+        <h1>Validar cuenta</h1>
+
+        {% if error %}
+            <div class="mensaje-error">
+                {{ error }}
+            </div>
+        {% endif %}
+
+        {% if mensaje_exito %}
+
+            <div class="mensaje-exito">
+                {{ mensaje_exito }}
+            </div>
+
+            <a href="{% url 'login' %}" class="btn-auth">
+                Iniciar sesión
+            </a>
+
+        {% else %}
+
+            <p>Ingresá el código enviado a tu correo electrónico.</p>
+
+            <form method="post">
+                {% csrf_token %}
+
+                <div class="campo">
+                    <label for="codigo">Código de validación</label>
+
+                    <input type="text"
+                           id="codigo"
+                           name="codigo"
+                           maxlength="6"
+                           minlength="6"
+                           pattern="[0-9]{6}"
+                           inputmode="numeric"
+                           autocomplete="one-time-code"
+                           required>
+                </div>
+
+                <button type="submit" class="btn-auth">
+                    Validar cuenta
+                </button>
+            </form>
+
+        {% endif %}
+
+    </div>
+</section>
+
+{% endblock %}

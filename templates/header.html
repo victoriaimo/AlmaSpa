@@ -1,0 +1,43 @@
+<header class="header">
+    <a class="logo" href="{% url 'inicio' %}">Alma Spa</a>
+
+    <nav class="nav">
+        <a href="{% url 'inicio' %}">Inicio</a>
+        <a href="{% url 'tratamientos' %}">Tratamientos</a>
+        <a href="{% url 'espacio' %}">El espacio</a>
+        <a href="{% url 'turnos' %}">Turnos</a>
+
+{% if user.is_authenticated %}
+
+    <li>
+        <a href="{% url 'panel' %}">Panel administrativo</a>
+    </li>
+
+    <li class="usuario-activo">
+        Hola, {{ user.first_name }} {{ user.last_name }}
+    </li>
+
+    <li>
+        <form method="post"
+              action="{% url 'logout' %}"
+              class="form-logout">
+
+            {% csrf_token %}
+
+            <button type="submit" class="btn-logout">
+                Cerrar sesión
+            </button>
+
+        </form>
+    </li>
+
+{% else %}
+
+    <li>
+        <a href="{% url 'login' %}">Iniciar sesión</a>
+    </li>
+
+{% endif %}
+
+    </nav>
+</header>

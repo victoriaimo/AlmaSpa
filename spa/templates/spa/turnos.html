@@ -1,0 +1,130 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'spa/css/spa.css' %}">
+{% endblock %}
+
+{% block title %}Turnos | Alma Spa{% endblock %}
+
+{% block content %}
+
+<section class="turnos">
+
+    <div class="turnos-imagen">
+        <img src="{% static 'img/masaje.jpeg' %}"
+             alt="Tratamiento de relajación en Alma Spa">
+
+        <div class="turnos-imagen-texto">
+            <p class="etiqueta">TU MOMENTO</p>
+            <h1>Regalate una pausa.</h1>
+        </div>
+    </div>
+
+    <div class="turnos-formulario">
+
+        <p class="etiqueta">SOLICITAR TURNO</p>
+
+        <h2>Reservá tu experiencia</h2>
+
+        <p class="turnos-intro">
+            Completá tus datos y elegí el tratamiento y la fecha
+            que preferís.
+        </p>
+
+        {% if mensaje_exito %}
+            <div class="mensaje-exito">
+                {{ mensaje_exito }}
+            </div>
+        {% endif %}
+
+        <form method="post" novalidate>
+            {% csrf_token %}
+
+            <div class="campo">
+                <label for="{{ form.nombre.id_for_label }}">
+                    {{ form.nombre.label }}
+                </label>
+
+                {{ form.nombre }}
+
+                {% for error in form.nombre.errors %}
+                    <p class="error">{{ error }}</p>
+                {% endfor %}
+            </div>
+
+            <div class="campo">
+                <label for="{{ form.email.id_for_label }}">
+                    {{ form.email.label }}
+                </label>
+
+                {{ form.email }}
+
+                {% for error in form.email.errors %}
+                    <p class="error">{{ error }}</p>
+                {% endfor %}
+            </div>
+
+            <div class="campo">
+                <label for="{{ form.telefono.id_for_label }}">
+                    {{ form.telefono.label }}
+                </label>
+
+                {{ form.telefono }}
+
+                {% for error in form.telefono.errors %}
+                    <p class="error">{{ error }}</p>
+                {% endfor %}
+            </div>
+
+            <div class="campo">
+                <label for="{{ form.tratamiento.id_for_label }}">
+                    {{ form.tratamiento.label }}
+                </label>
+
+                {{ form.tratamiento }}
+
+                {% for error in form.tratamiento.errors %}
+                    <p class="error">{{ error }}</p>
+                {% endfor %}
+            </div>
+
+            <div class="campo">
+                <label for="{{ form.fecha.id_for_label }}">
+                    {{ form.fecha.label }}
+                </label>
+
+                {{ form.fecha }}
+
+                {% for error in form.fecha.errors %}
+                    <p class="error">{{ error }}</p>
+                {% endfor %}
+            </div>
+
+            <div class="campo">
+                <label for="{{ form.mensaje.id_for_label }}">
+                    {{ form.mensaje.label }}
+                </label>
+
+                {{ form.mensaje }}
+
+                {% for error in form.mensaje.errors %}
+                    <p class="error">{{ error }}</p>
+                {% endfor %}
+            </div>
+
+            <button type="submit" class="boton-turno">
+                Solicitar turno
+            </button>
+
+        </form>
+
+    </div>
+
+</section>
+
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{% static 'spa/js/turnos.js' %}"></script>
+{% endblock %}

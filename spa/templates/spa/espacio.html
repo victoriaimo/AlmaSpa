@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'spa/css/spa.css' %}">
+{% endblock %}
+
+{% block title %}El espacio | Alma Spa{% endblock %}
+
+{% block content %}
+
+<section class="espacio-hero">
+    <div class="espacio-hero-texto">
+        <p class="etiqueta">ALMA SPA</p>
+        <h1>Un refugio<br>para tus sentidos.</h1>
+        <p>
+            Cada rincón fue pensado para transmitir calma,
+            armonía y bienestar desde el momento en que llegás.
+        </p>
+    </div>
+
+    <div class="espacio-hero-imagen">
+        <img src="{% static 'img/espacio-spa.jpeg' %}"
+             alt="Interior de Alma Spa">
+    </div>
+</section>
+
+<section class="espacio-propuesta">
+    <div>
+        <p class="etiqueta">NUESTRA PROPUESTA</p>
+        <h2>Tiempo, calma<br>y bienestar.</h2>
+    </div>
+
+    <div class="espacio-propuesta-texto">
+        <p>
+            Alma Spa es un espacio dedicado al cuidado personal,
+            donde cada experiencia invita a bajar el ritmo y
+            reconectar con uno mismo.
+        </p>
+
+        <p>
+            La combinación de ambientes cálidos, tratamientos
+            personalizados y una atención cuidada crea el entorno
+            ideal para disfrutar de una verdadera pausa.
+        </p>
+
+        <a href="{% url 'turnos' %}" class="boton-claro">
+            Reservar un turno
+        </a>
+    </div>
+</section>
+
+<section class="espacio-foto-grande">
+    <img src="{% static 'img/hero-spa.jpeg' %}"
+         alt="Experiencia de relajación en Alma Spa">
+</section>
+
+{% endblock %}

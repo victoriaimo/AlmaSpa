@@ -1,0 +1,135 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'spa/css/spa.css' %}">
+{% endblock %}
+
+{% block title %}Tratamientos | Alma Spa{% endblock %}
+
+{% block content %}
+
+<section class="pagina-encabezado">
+    <p class="etiqueta">ALMA SPA</p>
+    <h1>Nuestros tratamientos</h1>
+    <p>
+        Experiencias pensadas para relajar el cuerpo,
+        cuidar la piel y recuperar el equilibrio.
+    </p>
+</section>
+
+<section class="tratamientos-lista">
+
+    <article class="tratamiento-card">
+        <div class="tratamiento-imagen">
+            <img src="{% static 'img/masaje.jpeg' %}"
+                 alt="Masaje relajante">
+        </div>
+
+        <div class="tratamiento-info">
+            <span>01</span>
+            <h2>{{ "masaje relajante"|title }}</h2>
+            <p>
+                Una experiencia de relajación profunda que ayuda
+                a liberar tensiones y recuperar una sensación
+                de bienestar general.
+            </p>
+            <a href="{% url 'turnos' %}">Solicitar turno →</a>
+        </div>
+    </article>
+
+    <article class="tratamiento-card tratamiento-invertido">
+        <div class="tratamiento-imagen">
+            <img src="{% static 'img/hero-spa.jpeg' %}"
+                 alt="Tratamiento corporal">
+        </div>
+
+        <div class="tratamiento-info">
+            <span>02</span>
+            <h2>Tratamiento corporal</h2>
+            <p>
+                Un momento dedicado al cuidado del cuerpo,
+                combinando técnicas que favorecen la relajación
+                y una agradable sensación de renovación.
+            </p>
+            <a href="{% url 'turnos' %}">Solicitar turno →</a>
+        </div>
+    </article>
+
+    <article class="tratamiento-card">
+        <div class="tratamiento-imagen">
+            <img src="{% static 'img/espacio-spa.jpeg' %}"
+                 alt="Tratamiento facial">
+        </div>
+
+        <div class="tratamiento-info">
+            <span>03</span>
+            <h2>Tratamiento facial</h2>
+            <p>
+                Un cuidado suave pensado para revitalizar la piel
+                y disfrutar de una pausa en un ambiente tranquilo
+                y armonioso.
+            </p>
+            <a href="{% url 'turnos' %}">Solicitar turno →</a>
+        </div>
+    </article>
+
+</section>
+
+<!-- Productos obtenidos de la API externa -->
+
+<section class="productos-belleza">
+
+    <h2>Productos para el cuidado facial</h2>
+
+    <p>
+        Conocé diferentes productos de belleza y cuidado personal.
+    </p>
+
+    {% if error_api %}
+
+        <p class="mensaje-error">{{ error_api }}</p>
+
+    {% elif productos %}
+
+        <div class="productos-grid">
+
+            {% for producto in productos %}
+
+                <article class="producto-card">
+
+                    {% if producto.imagen %}
+                        <img src="{{ producto.imagen }}"
+                             alt="{{ producto.nombre }}"
+                             loading="lazy">
+                    {% endif %}
+
+                    <h3>{{ producto.nombre }}</h3>
+
+                    <p>{{ producto.marca }}</p>
+
+                </article>
+
+            {% endfor %}
+
+        </div>
+
+    {% else %}
+
+        <p>No hay productos disponibles.</p>
+
+    {% endif %}
+
+    <p class="fuente-api">
+        Información proporcionada por
+        <a href="https://world.openbeautyfacts.org/"
+           target="_blank"
+           rel="noopener noreferrer">
+            Open Beauty Facts
+        </a>.
+    </p>
+
+</section>
+
+{% endblock %}

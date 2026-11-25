@@ -1,0 +1,56 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Registro | Alma Spa{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'spa/css/spa.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="auth-section">
+    <div class="auth-container">
+
+        <h1>Crear cuenta</h1>
+        <p>Registrate para acceder al sistema de administración.</p>
+
+        {% if mensaje_exito %}
+            <div class="mensaje-exito">
+                {{ mensaje_exito }}
+            </div>
+        {% endif %}
+
+        <form method="post">
+            {% csrf_token %}
+
+            {{ form.non_field_errors }}
+
+            {% for campo in form %}
+                <div class="campo">
+                    {{ campo.label_tag }}
+                    {{ campo }}
+
+                    {% if campo.help_text %}
+                        <small>{{ campo.help_text }}</small>
+                    {% endif %}
+
+                    {{ campo.errors }}
+                </div>
+            {% endfor %}
+
+            <button type="submit" class="btn-auth">
+                Registrarme
+            </button>
+        </form>
+
+        <p>
+            ¿Ya tenés una cuenta?
+            <a href="{% url 'login' %}">Iniciar sesión</a>
+        </p>
+
+    </div>
+</section>
+
+{% endblock %}

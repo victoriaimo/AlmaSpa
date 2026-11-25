@@ -1,0 +1,128 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'spa/css/spa.css' %}">
+{% endblock %}
+
+{% block title %}Panel de administración | Alma Spa{% endblock %}
+
+{% block content %}
+
+<section class="panel-admin">
+
+    <p class="etiqueta">GESTIÓN INTERNA</p>
+
+    <h1>Panel de administración</h1>
+
+    <p>Administración de solicitudes recibidas en Alma Spa.</p>
+
+    <div class="panel-resumen">
+
+        <div class="resumen-tarjeta">
+            <h3>Total de solicitudes</h3>
+            <span>{{ total }}</span>
+        </div>
+
+        <div class="resumen-tarjeta">
+            <h3>Comerciales</h3>
+            <span>{{ comerciales }}</span>
+        </div>
+
+        <div class="resumen-tarjeta">
+            <h3>Técnicas</h3>
+            <span>{{ tecnicas }}</span>
+        </div>
+
+        <div class="resumen-tarjeta">
+            <h3>RRHH</h3>
+            <span>{{ rrhh }}</span>
+        </div>
+
+        <div class="resumen-tarjeta">
+            <h3>Generales</h3>
+            <span>{{ generales }}</span>
+        </div>
+
+    </div>
+
+    <div class="panel-encabezado">
+
+        <h2>Solicitudes recibidas</h2>
+
+        <a href="{% url 'crear_solicitud' %}" class="boton-crear">
+            + Crear solicitud
+        </a>
+
+    </div>
+
+    <div class="panel-tabla-contenedor">
+
+        <table class="panel-tabla">
+
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre y apellido</th>
+                    <th>Email</th>
+                    <th>Teléfono</th>
+                    <th>Tratamiento</th>
+                    <th>Fecha</th>
+                    <th>Mensaje</th>
+                    <th>Categoría</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                {% for solicitud in solicitudes %}
+
+                    <tr>
+                        <td>{{ solicitud.id }}</td>
+                        <td>{{ solicitud.nombre }}</td>
+                        <td>{{ solicitud.email }}</td>
+                        <td>{{ solicitud.telefono }}</td>
+                        <td>{{ solicitud.tratamiento }}</td>
+                        <td>{{ solicitud.fecha|date:"d/m/Y" }}</td>
+                        <td>{{ solicitud.mensaje }}</td>
+                        <td>{{ solicitud.get_categoria_display }}</td>
+
+                        <td>
+                            <div class="panel-acciones">
+
+                                <a href="{% url 'editar_solicitud' solicitud.id %}"
+                                   class="boton-editar">
+                                    Editar
+                                </a>
+
+                                <a href="{% url 'eliminar_solicitud' solicitud.id %}"
+                                   class="boton-eliminar">
+                                    Eliminar
+                                </a>
+
+                            </div>
+                        </td>
+
+                    </tr>
+
+                {% empty %}
+
+                    <tr>
+                        <td colspan="9">
+                            No hay solicitudes registradas.
+                        </td>
+                    </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+{% endblock %}
