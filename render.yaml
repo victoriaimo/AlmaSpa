@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: almaspa
+    env: python
+    buildCommand: "pip install -r requirements.txt && python manage.py collectstatic --noinput"
+    startCommand: "gunicorn alma_spa.wsgi:application"
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: alma_spa.settings
