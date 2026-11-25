@@ -129,9 +129,9 @@ class SolicitudForm(forms.ModelForm):
         ]
 
         widgets = {
-            'fecha': forms.DateInput(attrs={
-                'type': 'date'
-            }),
+            'fecha': forms.DateInput(
+                attrs={'type': 'date', 'min': date.today().isoformat()}
+            ),
             'mensaje': forms.Textarea(attrs={
                 'rows': 4
             }),
@@ -156,6 +156,16 @@ class SolicitudForm(forms.ModelForm):
             )
 
         return telefono
+
+    def clean_fecha(self):
+        fecha = self.cleaned_data['fecha']
+
+        if fecha < date.today():
+            raise forms.ValidationError(
+                'No se pueden seleccionar fechas anteriores a hoy.'
+            )
+
+        return fecha
 
 
 class RegistroForm(UserCreationForm):
